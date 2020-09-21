@@ -4,7 +4,7 @@ const NavBar = ({ totalDepences }) => {
   return (
     <React.Fragment>
       <nav className="navbar navbar-light ">
-      <span className="alert alert-primary" role="alert">
+      <span className="alert alert-secondary" role="alert">
       { totalDepences }
       </span>
       
