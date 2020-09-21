@@ -78,7 +78,7 @@ class App extends React.Component {
               onChange={(e) => this.updateInput("prix", e.target.value)}
             />
             <button
-              className="btn btn-lg btn-secondary"
+              className="btn btn-lg btn-success"
               onClick={() => this.addLine()}
             >
               Ajouter
