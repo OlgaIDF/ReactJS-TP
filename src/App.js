@@ -1,26 +1,98 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import ListProduits from "./ListProduits";
+import NavBar from "./Navbar";
+class App extends React.Component {
+  constructor(props) {
+    super(props);
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    this.state = {
+      id: 0,
+      produit: "",
+      prix: "",
+      lines: [],
+    };
+  }
+  updateInput(key, value) {
+    this.setState({
+      [key]: value,
+    });
+  }
+  addLine() {
+    const newLine = {
+      id: 1 + this.state.id,
+      value: {
+        produit: this.state.produit.slice(),
+        prix: this.state.prix.slice(),
+      },
+    };
+
+    this.setState({
+      id: newLine.id,
+      produit: "",
+      prix: "",
+      lines: [...this.state.lines, newLine],
+    });
+  }
+
+  handleDelete(lineToBeDeleted) {
+    const newLines = this.state.lines.filter((_line) => {
+      return _line !== lineToBeDeleted;
+    });
+    this.setState({ lines: newLines });
+  }
+
+  countSum = () => {
+    let sum = 0;
+    for (let i = 0; i < this.state.lines.length; ++i) {
+      sum += Number(this.state.lines[i].value.prix);
+    }
+    return sum;
+  };
+
+  render() {
+    return (
+      <div className="wrapper">
+        <NavBar
+          totalDepences = { "Total des dépenses: €"+ this.countSum()} 
+        ></NavBar>
+
+        <div className="App">
+          <h1 className="display-3 mb-5 text-center">Les dépenses </h1>
+          <div className="container">
+            <h3 className=" text-muted">Ajouter une nouvelle dépense</h3>
+            <br />
+            <input
+              className="mr-3 p-2"
+              type="text"
+              placeholder="Dépense"
+              value={this.state.produit}
+              onChange={(e) => this.updateInput("produit", e.target.value)}
+            />
+            <input
+              className="mr-5 p-2 "
+              type="text"
+              placeholder="Montant de la dépanse"
+              value={this.state.prix}
+              onChange={(e) => this.updateInput("prix", e.target.value)}
+            />
+            <button
+              className="btn btn-lg btn-secondary"
+              onClick={() => this.addLine()}
+            >
+              Ajouter
+            </button>
+
+            <ListProduits
+              handleDelete={this.handleDelete.bind(this)}
+              lines={this.state.lines}
+            />
+
+          
+          </div>
+        </div>
+      </div>
+    );
+  }
 }
 
 export default App;
