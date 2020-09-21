@@ -1,6 +1,8 @@
 import React from "react";
 import ListProduits from "./ListProduits";
 import NavBar from "./Navbar";
+import Footer from "./Footer";
+
 class App extends React.Component {
   constructor(props) {
     super(props);
@@ -53,7 +55,7 @@ class App extends React.Component {
     return (
       <div className="wrapper">
         <NavBar
-          totalDepences = { "Total des dépenses: €"+ this.countSum()} 
+          totalDepences={"Total des dépenses: €" + this.countSum()}
         ></NavBar>
 
         <div className="App">
@@ -86,10 +88,11 @@ class App extends React.Component {
               handleDelete={this.handleDelete.bind(this)}
               lines={this.state.lines}
             />
-
-          
           </div>
         </div>
+        <Footer
+          copyright={"NEKRASHEVYCH Olga ©  Tous droits réservés."}
+        ></Footer>
       </div>
     );
   }
