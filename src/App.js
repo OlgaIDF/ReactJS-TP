@@ -73,7 +73,7 @@ class App extends React.Component {
             <input
               className="mr-5 p-2 "
               type="text"
-              placeholder="Montant de la dépanse"
+              placeholder="Montant de la dépense"
               value={this.state.prix}
               onChange={(e) => this.updateInput("prix", e.target.value)}
             />
